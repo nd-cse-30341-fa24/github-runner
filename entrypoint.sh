@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo chown -R github:github /home/github
+
 if [ -n "${ADDITIONAL_PACKAGES}" ]; then
     TO_BE_INSTALLED=$(echo ${ADDITIONAL_PACKAGES} | tr "," " " )
     echo "Installing additional packages: ${TO_BE_INSTALLED}"

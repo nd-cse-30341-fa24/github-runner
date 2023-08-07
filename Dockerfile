@@ -27,19 +27,20 @@ RUN apt-get update \
         iproute2 \
         libssl-dev \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && useradd -m github \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m github \
     && usermod -aG sudo github \
     && echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER github
 WORKDIR /home/github
 
 RUN GITHUB_RUNNER_VERSION=$(curl --silent "https://api.github.com/repos/actions/runner/releases/latest" | jq -r '.tag_name[1:]') \
-    && curl -Ls https://github.com/actions/runner/releases/download/v${GITHUB_RUNNER_VERSION}/actions-runner-linux-x64-${GITHUB_RUNNER_VERSION}.tar.gz | sudo tar xz \
-    && sudo ./bin/installdependencies.sh
+    && curl -Ls https://github.com/actions/runner/releases/download/v${GITHUB_RUNNER_VERSION}/actions-runner-linux-x64-${GITHUB_RUNNER_VERSION}.tar.gz | tar xz \
+    && ./bin/installdependencies.sh
 
-COPY --chown=github:github entrypoint.sh runsvc.sh ./
-RUN sudo chmod u+x ./entrypoint.sh ./runsvc.sh
+COPY entrypoint.sh runsvc.sh ./
+RUN chmod 755 ./entrypoint.sh ./runsvc.sh
 
+USER github
 ENTRYPOINT ["/home/github/entrypoint.sh"]
