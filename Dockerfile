@@ -20,12 +20,19 @@ RUN apt-get update \
         python3-tornado \
         python3-requests \
         python3-yaml \
+        python3-tqdm \
         gawk \
         bc \
+        zip \
+        unzip \
+        netcat-openbsd \
         valgrind \
         strace \
         iproute2 \
         libssl-dev \
+        wamerican \
+        mypy \
+        nmap \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
