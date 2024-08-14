@@ -8,7 +8,7 @@ You can build this image yourself, or use the Docker image from the [Docker Hub]
 
 ## Building the container
 
-`docker build -t github-runner .`
+`docker buildx build -t github-runner .`
 
 ## Features
 
