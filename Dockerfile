@@ -30,6 +30,7 @@ RUN apt-get update \
         strace \
         iproute2 \
         libssl-dev \
+        libcurl4-openssl-dev \
         wamerican \
         mypy \
         nmap \
